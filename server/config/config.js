@@ -16,10 +16,23 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 let urlDB;
 
+// Para agregar una variable de entorno a heroku
+/*
+Para setear
+ > heroku config:set MONGO_URI="mongodb://nombreUseer:ClaveEntorno@ds137687.mlab.com:37687/cafe_p"
+
+Para ver las variables en consola
+ > heroku config
+
+Para eliminar la variable
+ > heroku config:unset nombre_variable
+
+*/
+
 if (process.env.NODE_ENV === 'dev') {
     urlDB = 'mongodb://localhost:27017/cafe';
 } else {
-    urlDB = 'mongodb://usuario_p:marisol2336@ds137687.mlab.com:37687/cafe_p';
+    urlDB = process.env.MONGO_URI;
 }
 
 //  Para hacerla publica
