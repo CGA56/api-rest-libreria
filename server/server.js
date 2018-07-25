@@ -13,8 +13,14 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
+
 // Importamos y usamos las rutas del usuario
-app.use(require('./controllers/usuario.js'));
+// app.use(require('./controllers/usuario.js'));
+// app.use(require('./controllers/login.js'));
+
+
+// CONFIGURACIÓN GLOBAL DE RUTAS
+app.use(require('./controllers/index.js'));
 
 
 

@@ -5,11 +5,21 @@ const bcrypt = require('bcrypt');
 const _ = require('underscore');
 const Usuario = require('../models/usuario');
 
+// destructuracion (para solo sacar el metodo)
+const { verificarToken, verificaAdmin_role } = require('../middleware/autentificacion');
 
 //listar
 
 // skip ultimos 5 mostrar max 5
-app.get('/usuarios', function(req, res) {
+app.get('/usuarios', verificarToken, (req, res) => {
+
+
+    return res.json({
+        usuario: req.usuario,
+        nombre: req.usuario.nombre,
+        correo: req.usuario.correo
+    });
+
 
     // Si existe la variable desde si no toma el segundo argumento
     let desde = req.query.desde || 0;
@@ -43,10 +53,19 @@ app.get('/usuarios', function(req, res) {
         });
 });
 // Crear
-app.post('/usuarios', function(req, res) {
+app.post('/usuarios', [verificarToken, verificaAdmin_role], (req, res) => {
     // Toda la info del post
     let body = req.body;
+    let role = req.usuario.role;
 
+    // if (role === 'USER_ROLE') {
+    //     return res.status(400).json({
+    //         ok: false,
+    //         error: {
+    //             mensaje: "El usuario debe ser administrador"
+    //         }
+    //     });
+    // }
     let objUsuario = new Usuario({
         nombre: body.nombre,
         correo: body.correo,
@@ -73,11 +92,22 @@ app.post('/usuarios', function(req, res) {
 
 });
 // Actualizar
-app.put('/usuarios/:id', function(req, res) {
+app.put('/usuarios/:id', [verificarToken, verificaAdmin_role], (req, res) => {
 
 
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
+    // let role = req.usuario.role;
+    // if (role === 'USER_ROLE') {
+    //     return res.status(400).json({
+    //         ok: false,
+    //         role,
+    //         nombre: req.usuario.nombre,
+    //         error: {
+    //             mensaje: "El usuario debe ser administrador"
+    //         }
+    //     });
+    // }
 
     /// err y usuario db callback
     Usuario.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, usuarioDB) => {
@@ -98,7 +128,7 @@ app.put('/usuarios/:id', function(req, res) {
 
 });
 
-app.delete('/usuarios/:id/:estado', function(req, res) {
+app.delete('/usuarios/:id/:estado', [verificarToken, verificaAdmin_role], (req, res) => {
     // get if for url
     let id = req.params.id;
     let estado = (req.params.estado === 'true');
