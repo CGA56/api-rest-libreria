@@ -7,6 +7,9 @@ const app = express();
 
 const bodyParser = require('body-parser');
 
+// libreria que ya contiene node js para habilitar rutas . En este caso la carpeta public.
+const path = require('path');
+
 
 
 // parse application/x-www-form-urlencoded
@@ -17,6 +20,11 @@ app.use(bodyParser.json());
 // Importamos y usamos las rutas del usuario
 // app.use(require('./controllers/usuario.js'));
 // app.use(require('./controllers/login.js'));
+
+// HABILITAR LA CARPETA PUBLIC
+app.use(express.static(path.resolve(__dirname, '../public')));
+
+
 
 
 // CONFIGURACIÓN GLOBAL DE RUTAS

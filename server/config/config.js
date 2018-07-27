@@ -48,3 +48,10 @@ if (process.env.NODE_ENV === 'dev') {
 
 //  Para hacerla publica
 process.env.URLDB = urlDB;
+
+
+//================================================
+// GOOGLE CLIENT ID
+//================================================
+
+process.env.CLIENT_ID = process.env.CLIENT_ID || '930234801166-dva2bogf0iig3d193qln7r8jc117a0j7.apps.googleusercontent.com';
