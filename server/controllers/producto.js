@@ -111,7 +111,7 @@ app.get('/productos/:id', (req, res) => {
 /**
  *  CREAR NUEVO PRODUCTO
  */
-app.post('/productos/:id_categoria', verificarToken, (req, res) => {
+app.post('/productos', verificarToken, (req, res) => {
 
     let body = req.body;
     let usuario = req.usuario;
