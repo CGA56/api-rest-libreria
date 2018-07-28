@@ -115,7 +115,7 @@ app.post('/productos/:id_categoria', verificarToken, (req, res) => {
 
     let body = req.body;
     let usuario = req.usuario;
-    let id_categoria = req.params.id_categoria;
+
 
 
     let obj_producto = new Producto({
@@ -123,7 +123,7 @@ app.post('/productos/:id_categoria', verificarToken, (req, res) => {
         precioUni: body.precioUni,
         descripcion: body.descripcion,
         disponible: body.disponible,
-        categoria: id_categoria,
+        categoria: body.categoria,
         usuario: usuario._id
 
 
