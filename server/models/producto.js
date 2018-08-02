@@ -45,6 +45,10 @@ let productoSchema = new SChema({
     usuario: {
         type: SChema.Types.ObjectId,
         ref: 'Usuario'
+    },
+    img: {
+        type: String,
+        required: false
     }
 });
 //  Para que no se pueda ver la pasword
