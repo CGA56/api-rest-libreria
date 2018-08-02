@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const bcrypt = require('bcrypt');
 // Para que ciertos campos no se puedan actualizar+
-const _ = require('underscore');
 const Usuario = require('../models/usuario');
 
 // destructuracion (para solo sacar el metodo)
@@ -14,11 +13,11 @@ const { verificarToken, verificaAdmin_role } = require('../middleware/autentific
 app.get('/usuarios', verificarToken, (req, res) => {
 
 
-    return res.json({
-        usuario: req.usuario,
-        nombre: req.usuario.nombre,
-        correo: req.usuario.correo
-    });
+    // return res.json({
+    //     usuario: req.usuario,
+    //     nombre: req.usuario.nombre,
+    //     correo: req.usuario.correo
+    // });
 
 
     // Si existe la variable desde si no toma el segundo argumento
@@ -42,6 +41,7 @@ app.get('/usuarios', verificarToken, (req, res) => {
             }
             //    Paso!
             // find({google:true})
+
             Usuario.count({ estado: true }, (err, conteo) => {
                 res.json({
                     ok: true,
