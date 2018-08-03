@@ -62,8 +62,8 @@ app.put('/upload/:tipo/:id', (req, res) => {
 
     // cambiar nombre al archivo (unico y prevenir el cache en el navegador)
 
-    let nombreArchivo = `${id}-${new Date().getMilliseconds()}.${extencion}`
-        // Use the mv() method to place the file somewhere on your server
+    let nombreArchivo = `${id}-${new Date().getMilliseconds()}.${extencion}`;
+    // Use the mv() method to place the file somewhere on your server
     archivo.mv(`../uploads/${tipo}/${nombreArchivo}`, (err) => {
         if (err) {
             return res.status(500).json({
