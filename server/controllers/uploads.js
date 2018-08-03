@@ -121,8 +121,8 @@ function imaguenUsuario(idUsuario, res, nombreArchivo) {
     });
 }
 
-function imaguenProducto(idProducto, res, nombreArchivo) {
-    Producto.findById(idProducto, (err, productoDB) => {
+function imaguenProducto(idUsuario, res, nombreArchivo) {
+    Producto.findOne({ usuario: idUsuario }, (err, productoDB) => {
         if (err) {
             borraArchivo(nombreArchivo, 'productos');
             return res.status(400).json({
