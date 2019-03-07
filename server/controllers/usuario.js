@@ -52,6 +52,37 @@ app.get('/usuarios', verificarToken, (req, res) => {
 
         });
 });
+//registrar usuario
+app.post('/usuarios/registrar', (req, res) => {
+    let body = req.body;
+    let role = 'USER_ROLE';
+
+    let objUsuario = new Usuario({
+        nombre: body.nombre,
+        correo: body.correo,
+        password: bcrypt.hashSync(body.password, 10),
+        role: role
+    });
+
+    // Guardar moongose
+    objUsuario.save((err, usuarioDB) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            })
+        }
+        // usuarioDB.password = null;
+        res.json({
+            ok: true,
+            mensaje: usuarioDB
+        });
+
+    });
+
+});
+
+
 // Crear
 app.post('/usuarios', [verificarToken, verificaAdmin_role], (req, res) => {
     // Toda la info del post
