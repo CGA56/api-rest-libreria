@@ -10,6 +10,8 @@ let verificarToken = (req, res, next) => {
 
     // LO TOMA DESDE EL HEADER DE LA PETICION
     let token = req.get('token');
+    console.log(token);
+    console.log(req.headers.authorization);
     //  process esta en config
     jwt.verify(token, process.env.SEED, (err, decoded) => {
         if (err) {
@@ -55,7 +57,6 @@ let verificaAdmin_role = (req, res, next) => {
 
 let verificaTokenImg = (req, res, next) => {
     let token = req.query.token;
-
     jwt.verify(token, process.env.SEED, (err, decoded) => {
         if (err) {
             return res.status(401).json({

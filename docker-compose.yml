@@ -1,0 +1,22 @@
+
+# docker-compose down
+# docker-compose build
+# docker-compose up -d mongo
+# docker-compose up web
+# Crea automanticamente el docker file 
+version: "2"
+services:
+  api_biblioteca:
+    build: .
+    volumes:
+      - ./:/app
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+  mongo:
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
