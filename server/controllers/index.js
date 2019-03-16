@@ -11,6 +11,7 @@ app.use(require('../controllers/categoria.js'));
 app.use(require('../controllers/producto.js'));
 app.use(require('./uploads'));
 app.use(require('../controllers/imagenes.js'));
+app.use(require('../controllers/libro'));
 
 
 

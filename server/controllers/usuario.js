@@ -52,7 +52,7 @@ app.get('/usuarios', verificarToken, (req, res) => {
 
         });
 });
-//registrar usuario
+//registrar nuevo  usuario por formulario
 app.post('/usuarios/registrar', (req, res) => {
     let body = req.body;
     let role = 'USER_ROLE';

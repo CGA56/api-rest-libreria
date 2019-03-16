@@ -41,10 +41,11 @@ Para eliminar la variable
 */
 
 if (process.env.NODE_ENV === 'dev') {
-    urlDB = 'mongodb://localhost:27017/cafe';
+    urlDB = 'mongodb://mongo:27017/libreria';  ///'mongodb://localhost:27017/libreria';
+     
 } else {
     urlDB = process.env.MONGO_URI;
-}
+} 
 
 //  Para hacerla publica
 process.env.URLDB = urlDB;
